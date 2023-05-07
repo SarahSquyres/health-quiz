@@ -1,0 +1,17 @@
+.score-time {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.health-quiz-title {
+    text-align: center;
+}
+
+.instructions{
+    text-align: center;
+}
+
+.start-btn{
+    text-align: center;
+}
