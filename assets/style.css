@@ -1,11 +1,21 @@
-.score-time {
+/* High score, time clock */
+header {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
+    color: blue;
+    border-style: red, solid;
+    font-size: 40px;
 }
 
-.health-quiz-title {
+/* Quiz intro, instructions, start btn */
+main{
+    border-style: solid;
+}
+
+h1 {
     text-align: center;
+    color: blue;
 }
 
 .instructions{
@@ -14,4 +24,36 @@
 
 .start-btn{
     text-align: center;
+}
+
+/* Questions and end game screen, invisible by default */
+.question-and-final{
+    display: none;
+    text-align: center;
+}
+
+/* Questions, invisible by default */
+#question {
+    display: none;
+    text-align: center; 
+    border-style: solid; 
+    border-color: red; 
+    padding: 20px;
+}
+
+li{
+    list-style: none;
+}
+
+/* End game, invisible by default */
+.final-screen{
+    display: none;
+    border-style: solid;
+    text-align: center;
+}
+
+/* High Scores, invisible by default */
+.high-scores{
+    text-align: center;
+    display: none;
 }

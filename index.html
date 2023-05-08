@@ -1,34 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/style.css" />
-    <title>Health Quiz</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/style.css" />
+  <title>Health Quiz</title>
 </head>
+
 <body>
-     
-      <header class="score-time">
-        
-        <div class="time"></div>
 
-        <div class="score">View High Scores</div>
-        
-      </header>
-     
+  <header>
+    <span class="time">Time: </span>
+    <div class="score">View High Scores</div>
+  </header>
 
-    <div class= "health-quiz-title">Health Quiz</div>
+  <!-- Quiz Intro, instructions, start btn -->
+  <main id="main">
+    <h1>Health Quiz</h1>
 
-
-    <p class="instructions">Try to answer the following health-related questions within the time limit.<br>  
-    Incorrect answers will penalize your score and decrease your time by 10 seconds!!!
+    <p class="instructions">Try to answer the following health-related questions within the time limit.<br>
+      Incorrect answers will penalize your score and decrease your time by 10 seconds!!!
     </p>
 
     <div class="start-btn">
-    <button>Start</button>
+      <button>Start</button>
     </div>
 
-    <script src="./assets/script.js"></script>
+  </main>
+
+  <!-- Questions and end game screen -->
+  <div class="questions-and-final">
+    
+    <!-- Questions, questions are stored in JS variable-->
+    <section id="question"></section>
+
+    <!-- End game, submit button takes you to High Scores Screen-->
+    <section class="final-screen">
+
+      <h2>All done!</h2>
+
+      <P>Your final score is </P>
+      <input type="text" Value="Enter Initials">
+      <button>Submit</button>
+
+    </section>
+
+    <!--High Scores-->
+    <section class="high-scores">
+
+      <h2>High Scores</h2>
+      <ol>
+        <li>1. List of high scores, pulled from local storage?</li>
+        <li>2. List of high scores, pulled from local storage?</li>
+        <li>3. List of high scores, pulled from local storage?</li>
+        <li>4. List of high scores, pulled from local storage?</li>
+        <li>5. List of high scores, pulled from local storage?</li>
+        <li>6. List of high scores, pulled from local storage?</li>
+      </ol>
+      <button>Go Back</button><button>Reset High Scores</button>
+
+    </section>
+  </div>
+  <script src="./assets/script.js"></script>
 </body>
+
 </html>
