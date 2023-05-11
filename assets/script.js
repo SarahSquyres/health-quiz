@@ -1,27 +1,97 @@
 // Define JS variables = page elements
-// queryselector elects element by class
+// queryselector selects element by class
 var quizIntro = document.getElementById("main");
 var questionElement = document.getElementById("question");
 var startButton = document.querySelector(".start-btn");
 var timeLeft = document.querySelector(".time");
+var optionsButton = document.querySelector(".btn");
+var finalScrEl = document.querySelector(".final-screen")
+var enterInitials = document.querySelector(".initials");
+var index = 0;
+var timerInterval;
+var submitButton = document.querySelector(".submitBtn");
+var highScores = document.querySelector("high-scores");
 
 
-// Click start button
+// Click start button, start timer, display first question
 startButton.addEventListener("click", startGame);
 
-  //toggle main display to none
-  function startGame() {
+function startGame() {
   quizIntro.setAttribute("style", "display:none");
-  questionElement.setAttribute("style","display:block;");
-
-  displayQuestion();
+  questionElement.setAttribute("style", "display:block;");
   startTimer();
+  displayQuestion();
+}
 
+// Starts Timer
+var secondsLeft = 100;
+
+function startTimer() {
+  // Sets interval in variable
+  timerInterval = setInterval(function () {
+    secondsLeft--;
+    timeLeft.textContent = "Time: " + secondsLeft;
+
+    if (secondsLeft === 0) {
+      // Stops execution of action at set interval
+      endGame();
+    }
+
+  }, 1000);
+}
+
+//Activate screen help from Andrew
+
+var displayQuestion = function () {
+  questionElement.innerHTML = "";
+  var questionH2 = document.createElement('h2');
+  questionH2.textContent = questions[index].question;
+
+  questionElement.appendChild(questionH2);
+
+  var optionsList = document.createElement('ul');
+
+  questions[index].options.forEach(option => {
+    var button = document.createElement("button");
+    button.innerHTML = option;
+    button.onclick = checkAnswer;
+    optionsList.appendChild(button);
+  })
+
+  questionElement.appendChild(optionsList);
+}
+
+// eventListener select option event.target, help from Faran
+function checkAnswer(e) {
+  var userChoice = e.target.textContent;
+  console.log(userChoice)
+  if (userChoice !== questions[index].answer) {
+    secondsLeft -= 10;
+  }
+  index++;
+  if (index === questions.length) {
+    endGame();
   }
 
-// start timer
-// .question display: none toggle off
-// display first index in question array
+  displayQuestion();
+
+}
+// Help from Faran
+function endGame() {
+  clearInterval(timerInterval);
+  questionElement.setAttribute("style", "display:none;");
+  finalScrEl.setAttribute("style", "display:block;");
+}
+
+// Help from https://www.youtube.com/watch?v=k8yJCeuP6I8&t=2s
+submitButton.onclick = function() {
+  var savedScore = enterInitials.value;
+  console.log(savedScore);
+  localStorage.setItem("initials", savedScore);
+
+  highScores.setAttribute("style", "display:block;");
+  };
+
 
 
 
@@ -47,38 +117,8 @@ var questions = [
     options: ["Wrong", "Wrong", "Wrong", "Right",],
     answer: "Right"
   },
-  {
-    question: "Question 5?",
-    options: ["Wrong", "Wrong", "Wrong", "Right"],
-    answer: "Right"
-  },
 
 ]
-//For loop to loop through questions
-
-var displayQuestion = function(){
-  // for(i = 0; i = questions.length; i++)
-    questionElement.textContent = questions[0].question + questions[0].options;
-    document.body.appendChild(questionElement);
-}
 
 
 
-
-
-// Starts Timer
-var secondsLeft = 200;
-
-function startTimer() {
-    // Sets interval in variable
-    var timerInterval = setInterval(function() {
-      secondsLeft--;
-      timeLeft.textContent = "Time: " + secondsLeft;
-  
-      if(secondsLeft === 0) {
-        // Stops execution of action at set interval
-        clearInterval(timerInterval);
-      }
-  
-    }, 1000);
-}

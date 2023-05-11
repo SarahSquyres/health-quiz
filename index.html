@@ -34,7 +34,9 @@
   <div class="questions-and-final">
     
     <!-- Questions, questions are stored in JS variable-->
-    <section id="question"></section>
+    <section id="question">
+
+    </section>
 
     <!-- End game, submit button takes you to High Scores Screen-->
     <section class="final-screen">
@@ -42,8 +44,8 @@
       <h2>All done!</h2>
 
       <P>Your final score is </P>
-      <input type="text" Value="Enter Initials">
-      <button>Submit</button>
+      <input class = "initials" type="text" Value="Enter Initials">
+      <button class = "submitBtn">Save Your Score</button>
 
     </section>
 
@@ -51,18 +53,12 @@
     <section class="high-scores">
 
       <h2>High Scores</h2>
-      <ol>
-        <li>1. List of high scores, pulled from local storage?</li>
-        <li>2. List of high scores, pulled from local storage?</li>
-        <li>3. List of high scores, pulled from local storage?</li>
-        <li>4. List of high scores, pulled from local storage?</li>
-        <li>5. List of high scores, pulled from local storage?</li>
-        <li>6. List of high scores, pulled from local storage?</li>
-      </ol>
+      <ol class = scores-list></ol>
       <button>Go Back</button><button>Reset High Scores</button>
 
     </section>
   </div>
+
   <script src="./assets/script.js"></script>
 </body>
 
