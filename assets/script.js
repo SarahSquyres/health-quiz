@@ -10,7 +10,13 @@ var enterInitials = document.querySelector(".initials");
 var index = 0;
 var timerInterval;
 var submitButton = document.querySelector(".submitBtn");
-var highScores = document.querySelector("high-scores");
+var highScores = document.querySelector(".high-scores");
+var scoreDisplay = document.querySelector(".score");
+var scoreList = document.querySelector(".scores-list");
+var initialList = document.querySelector(".initials-list");
+var scoresInitials = document.querySelector(".scores-initials");
+
+// var scoreArray = [];
 
 
 // Click start button, start timer, display first question
@@ -81,18 +87,47 @@ function endGame() {
   clearInterval(timerInterval);
   questionElement.setAttribute("style", "display:none;");
   finalScrEl.setAttribute("style", "display:block;");
+  scoreDisplay.innerHTML =  "Your final score is: " + secondsLeft;
+  finalScrEl.appendChild(scoreDisplay);
 }
 
-// Help from https://www.youtube.com/watch?v=k8yJCeuP6I8&t=2s
+// High Scores Screen
 submitButton.onclick = function() {
-  var savedScore = enterInitials.value;
-  console.log(savedScore);
-  localStorage.setItem("initials", savedScore);
-
+  finalScrEl.setAttribute("style", "display:none;");
   highScores.setAttribute("style", "display:block;");
+// section 4 activity 22, help from Abram
+  localStorage.setItem("playerInitials", enterInitials.value);
+  localStorage.setItem("saveScore", secondsLeft);
+
+  
   };
+  renderHighScores();
+
+function renderHighScores() {
+  // scoreList.innerHTML = "";
+  // scoresInitials.textContent = scoreArray.length;
+  // for (var i = 0; i < scoreArray.length; i++) {
+  //   var scoreArrays = scoreArray[i];
+
+  //   var li = document.createElement("li");
+  //   li.textContent = scoreArrays;
+  //   li.setAttribute("data-index", i);
+    
+  //   scoreList.appendChild(li);
+
+  var scoreStorage = localStorage.getItem("saveScore");
+  var savedInitals = localStorage.getItem("playerInitials");
+
+  scoreList.textContent = "Score:" + scoreStorage + " Initials: " + savedInitals;
+
+}
 
 
+
+
+// for (let i = 0; i < localStorage.length; i++) {
+//   var scoreKey = localStorage.key(i);
+// }
 
 
 // Questions are stored in an array of objects

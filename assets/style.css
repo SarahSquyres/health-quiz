@@ -56,4 +56,6 @@ li{
 .high-scores{
     text-align: center;
     display: none;
+    border: rgb(170, 56, 75);
+    border-style: solid;
 }
