@@ -94,9 +94,11 @@ submitButton.onclick = function() {
   highScores.setAttribute("style", "display:block;");
   
   var score = [
-    ["Initials:" + enterInitials.value, "Score:" +
-    secondsLeft]
+    {initials:  enterInitials.value, 
+      score: secondsLeft}
   ]
+
+  score.push({enterInitials, secondsLeft});
 
   localStorage.setItem("score", JSON.stringify(score));
 
