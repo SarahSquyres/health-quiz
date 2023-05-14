@@ -13,11 +13,7 @@ var submitButton = document.querySelector(".submitBtn");
 var highScores = document.querySelector(".high-scores");
 var scoreDisplay = document.querySelector(".score");
 var scoreList = document.querySelector(".scores-list");
-var initialList = document.querySelector(".initials-list");
-var scoresInitials = document.querySelector(".scores-initials");
-
-// var scoreArray = [];
-
+// var score = 0;
 
 // Click start button, start timer, display first question
 startButton.addEventListener("click", startGame);
@@ -80,13 +76,14 @@ function checkAnswer(e) {
   }
 
   displayQuestion();
-
 }
+
 // Help from Faran
 function endGame() {
   clearInterval(timerInterval);
   questionElement.setAttribute("style", "display:none;");
   finalScrEl.setAttribute("style", "display:block;");
+
   scoreDisplay.innerHTML =  "Your final score is: " + secondsLeft;
   finalScrEl.appendChild(scoreDisplay);
 }
@@ -95,39 +92,33 @@ function endGame() {
 submitButton.onclick = function() {
   finalScrEl.setAttribute("style", "display:none;");
   highScores.setAttribute("style", "display:block;");
-// section 4 activity 22, help from Abram
-  localStorage.setItem("playerInitials", enterInitials.value);
-  localStorage.setItem("saveScore", secondsLeft);
-
   
-  };
-  renderHighScores();
+  var score = [
+    ["Initials:" + enterInitials.value, "Score:" +
+    secondsLeft]
+  ]
+
+  localStorage.setItem("score", JSON.stringify(score));
+
+  console.log(score);
+  console.log(score.length);
+};
+ 
+// section 4 activity 22, help from Abram
+ 
+
+renderHighScores();
 
 function renderHighScores() {
-  // scoreList.innerHTML = "";
-  // scoresInitials.textContent = scoreArray.length;
-  // for (var i = 0; i < scoreArray.length; i++) {
-  //   var scoreArrays = scoreArray[i];
+highScoresList = JSON.parse(localStorage.getItem("score")) || [];
 
-  //   var li = document.createElement("li");
-  //   li.textContent = scoreArrays;
-  //   li.setAttribute("data-index", i);
-    
-  //   scoreList.appendChild(li);
-
-  var scoreStorage = localStorage.getItem("saveScore");
-  var savedInitals = localStorage.getItem("playerInitials");
-
-  scoreList.textContent = "Score:" + scoreStorage + " Initials: " + savedInitals;
-
+  var list = document.createElement("li");
+  list.innerHTML = highScoresList;
+  scoreList.appendChild(list);
 }
+  
 
 
-
-
-// for (let i = 0; i < localStorage.length; i++) {
-//   var scoreKey = localStorage.key(i);
-// }
 
 
 // Questions are stored in an array of objects
