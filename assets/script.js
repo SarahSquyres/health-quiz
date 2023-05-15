@@ -9,11 +9,8 @@ var finalScrEl = document.querySelector(".final-screen")
 var enterInitials = document.querySelector(".initials");
 var index = 0;
 var timerInterval;
-var submitButton = document.querySelector(".submitBtn");
-var highScores = document.querySelector(".high-scores");
-var scoreDisplay = document.querySelector(".score");
-var scoreList = document.querySelector(".scores-list");
-// var score = 0;
+
+
 
 // Click start button, start timer, display first question
 startButton.addEventListener("click", startGame);
@@ -87,42 +84,63 @@ function endGame() {
   scoreDisplay.innerHTML =  "Your final score is: " + secondsLeft;
   finalScrEl.appendChild(scoreDisplay);
 }
+// ----------------------------------------------------------------
+
+var submitButton = document.querySelector(".submitBtn");
+var highScores = document.querySelector(".high-scores");
+var scoreDisplay = document.querySelector(".score");
+var scoreList = document.querySelector(".scores-list");
 
 // High Scores Screen
 submitButton.onclick = function() {
   finalScrEl.setAttribute("style", "display:none;");
   highScores.setAttribute("style", "display:block;");
   
-  var score = [
-    {initials:  enterInitials.value, 
-      score: secondsLeft}
-  ]
+// renderList();
 
-  score.push({enterInitials, secondsLeft});
-
-  localStorage.setItem("score", JSON.stringify(score));
-
-  console.log(score);
-  console.log(score.length);
+  // score.push({enterInitials, secondsLeft});
+  // localStorage.setItem("score", JSON.stringify(score));
+  // console.log(score);
+  // console.log(score.length);
 };
- 
-// section 4 activity 22, help from Abram
- 
 
-renderHighScores();
+function renderList(){ 
+  var initialValue = enterInitials.value.trim();
 
-function renderHighScores() {
-highScoresList = JSON.parse(localStorage.getItem("score")) || [];
+  if (initialValue !== "") {
+    var finalList = JSON.parse(window.localStorage.getItem('highScoresList')) || []
 
-  var list = document.createElement("li");
-  list.innerHTML = highScoresList;
-  scoreList.appendChild(list);
+console.log(finalList);
+
+    var latestScore = {
+      score: secondsLeft,
+      initials: initialValue
+    };
+
+
+    finalList.push(latestScore)
+    
+    localStorage.setItem("highScoresList", JSON.stringify(highScoresList));
+    console.log(finalList)
+  };
 }
+
+renderList()
+// section 4 activity 22, help from Abram
+// questions[index].options.forEach(option => {
+
+// renderHighScores();
+
+// function renderHighScores() {
+
+
+// // for(let i=0; i<highScoresList[i].initials; i++);
+
+//   var list = document.createElement("li");
+//   list.innerHTML = finalList;
+//   scoreList.appendChild(list);
+// }
   
-
-
-
-
 // Questions are stored in an array of objects
 var questions = [
   {
