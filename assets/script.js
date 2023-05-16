@@ -81,51 +81,75 @@ function endGame() {
   questionElement.setAttribute("style", "display:none;");
   finalScrEl.setAttribute("style", "display:block;");
 
-  scoreDisplay.innerHTML =  "Your final score is: " + secondsLeft;
+  scoreDisplay.innerHTML = "Your final score is: " + secondsLeft;
   finalScrEl.appendChild(scoreDisplay);
 }
 // ----------------------------------------------------------------
 
-var submitButton = document.querySelector(".submitBtn");
+var submitButton = document.querySelector("#saveScoreBtn");
 var highScores = document.querySelector(".high-scores");
 var scoreDisplay = document.querySelector(".score");
 var scoreList = document.querySelector(".scores-list");
 
 // High Scores Screen
-submitButton.onclick = function() {
+submitButton.onclick = function () {
+  addHighScore();
   finalScrEl.setAttribute("style", "display:none;");
   highScores.setAttribute("style", "display:block;");
-  
-// renderList();
-
-  // score.push({enterInitials, secondsLeft});
-  // localStorage.setItem("score", JSON.stringify(score));
-  // console.log(score);
-  // console.log(score.length);
 };
 
-function renderList(){ 
+
+// Render High Scores List
+function renderHighScoresList() {
+  // Grab high Scores list in local storage if there is one. If not, set to empty list
+  var finalList = JSON.parse(window.localStorage.getItem('highScoresList')) || [];
+
+  // Clear out high scores html for updated changes
+  highScores.innerHTML = "";
+
+  // Create an ul element to hold the high scores
+  var scoresUlEl = document.createElement("ul");
+
+  // loop the high scores
+  for (var i = 0; i < finalList.length; i++) {
+    // Create a li for the score
+    var scoresLi = document.createElement('li');
+    scoresLi.textContent = finalList[i].initials + '-' + finalList[i].score;
+
+    // append to the scores list element
+    scoresUlEl.appendChild(scoresLi);
+  }
+
+
+  // append high scores to the highscore section
+  highScores.appendChild(scoresUlEl);
+}
+
+
+// Adds Highscores
+function addHighScore() {
   var initialValue = enterInitials.value.trim();
+  // Gets high score list from local storage if there is one. If not, set to empty array
+  var highScoresList = JSON.parse(window.localStorage.getItem('highScoresList')) || [];
 
+  // Create score object to store score and intial
   if (initialValue !== "") {
-    var finalList = JSON.parse(window.localStorage.getItem('highScoresList')) || []
-
-console.log(finalList);
-
     var latestScore = {
       score: secondsLeft,
       initials: initialValue
     };
 
+    // Push user's score onto high scores list
+    highScoresList.push(latestScore)
+    console.log(highScoresList);
 
-    finalList.push(latestScore)
-    
+    // Save the updated highScoresList to local storage
     localStorage.setItem("highScoresList", JSON.stringify(highScoresList));
-    console.log(finalList)
-  };
-}
 
-renderList()
+    // We want to render the high scores list
+    renderHighScoresList();
+  }
+}
 // section 4 activity 22, help from Abram
 // questions[index].options.forEach(option => {
 
@@ -140,7 +164,7 @@ renderList()
 //   list.innerHTML = finalList;
 //   scoreList.appendChild(list);
 // }
-  
+
 // Questions are stored in an array of objects
 var questions = [
   {
